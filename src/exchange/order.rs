@@ -23,6 +23,18 @@ pub struct Trigger {
     pub tpsl: String,
 }
 
+#[derive(Deserialize, Serialize, Debug, Clone, Default)]
+#[serde(rename_all = "camelCase")]
+pub enum OrderGrouping {
+    #[serde(rename = "na")]
+    #[default]
+    Na,
+    #[serde(rename = "normalTpsl")]
+    NormalTpsl,
+    #[serde(rename = "positionTpsl")]
+    PositionTpsl,
+}
+
 #[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub enum Order {
