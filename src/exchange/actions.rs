@@ -8,7 +8,9 @@ use serde::{Deserialize, Serialize, Serializer};
 use super::{cancel::CancelRequestCloid, BuilderInfo};
 use crate::{
     eip712::Eip712,
-    exchange::{cancel::CancelRequest, modify::ModifyRequest, order::OrderRequest},
+    exchange::{
+        cancel::CancelRequest, modify::ModifyRequest, order::OrderGrouping, order::OrderRequest,
+    },
 };
 
 fn eip_712_domain(chain_id: u64) -> Eip712Domain {
@@ -75,7 +77,7 @@ pub struct UpdateIsolatedMargin {
 #[serde(rename_all = "camelCase")]
 pub struct BulkOrder {
     pub orders: Vec<OrderRequest>,
-    pub grouping: String,
+    pub grouping: OrderGrouping,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub builder: Option<BuilderInfo>,
 }
